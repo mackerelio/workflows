@@ -20,7 +20,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os-version: ${{ fromJson(inputs-os-versions) }}
+        os-version: ${{ fromJson(inputs.os-versions) }}
         go-version: ${{ fromJson(inputs.go-versions) }}
     runs-on: ${{ matrix.os-version }}
     steps:

@@ -1,0 +1,32 @@
+name: Release(goreleaser)
+
+on:
+  workflow_call:
+    inputs:
+      go-version:
+        default: '1.18'
+        required: false
+        type: string
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: actions/cache@v3
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+    - uses: actions/setup-go@v3
+      with:
+        go-version: ${{ inputs.go-version }}
+    - uses: goreleaser/goreleaser-action@v2
+      with:
+        args: release --rm-dist
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+

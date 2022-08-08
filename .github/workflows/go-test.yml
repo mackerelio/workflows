@@ -7,12 +7,12 @@ on:
     inputs:
       os-versions:
         description: 'Stringfied JSON object listing GitHub-hosted runnners'
-        default: '["ubuntu-20.04", "windows-2022", "macos-11"]'
+        default: '["ubuntu-22.04", "windows-2022", "macos-12"]'
         required: false
         type: string
       go-versions:
         description: 'Stringfied JSON object listing target Go versions'
-        default: '["1.18.x", "1.17.x"]'
+        default: '["1.19.x", "1.18.x"]'
         required: false
         type: string
 

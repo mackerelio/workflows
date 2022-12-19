@@ -24,7 +24,7 @@ jobs:
     - uses: actions/setup-go@v3
       with:
         go-version: ${{ inputs.go-version }}
-    - uses: goreleaser/goreleaser-action@v3
+    - uses: goreleaser/goreleaser-action@v4
       with:
         args: release --rm-dist
       env:

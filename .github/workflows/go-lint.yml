@@ -1,0 +1,34 @@
+name: Lint(Go)
+
+on:
+  workflow_call:
+    # For now, inputs supports only three types: 'boolean', 'number' or 'string'.
+    # workaround: https://github.community/t/reusable-workflow-with-strategy-matrix/205676/2
+    inputs:
+      os-versions:
+        description: 'Stringfied JSON object listing GitHub-hosted runnners'
+        default: '["ubuntu-22.04", "windows-2022", "macos-12"]'
+        required: false
+        type: string
+      skip-cache:
+        description: 'All caching is disabled'
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+  lint:
+    strategy:
+      matrix:
+        os-version: ${{ fromJson(inputs.os-versions) }}
+    runs-on: ${{ matrix.os-version }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v3
+      with:
+        go-version-file: go.mod
+        cache: true
+    - uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        skip-cache: ${{ inputs.skip-cache }}

@@ -12,7 +12,7 @@ on:
         type: string
       go-versions:
         description: 'Stringfied JSON object listing target Go versions'
-        default: '["1.19.x", "1.18.x"]'
+        default: '["1.20.x", "1.19.x"]'
         required: false
         type: string
 
@@ -25,15 +25,10 @@ jobs:
     runs-on: ${{ matrix.os-version }}
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/cache@v3
-      with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-go-
     - uses: actions/setup-go@v3
       with:
         go-version: ${{ matrix.go-version }}
+        cache: true
     - run: go test -race -covermode=atomic -coverprofile=prof.out ./...
       shell: bash
     - uses: shogo82148/actions-goveralls@v1

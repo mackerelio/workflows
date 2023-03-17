@@ -1,0 +1,38 @@
+name: Run(Go)
+run-name: Run ${{ inputs.run }}
+
+on:
+  workflow_call:
+    # For now, inputs supports only three types: 'boolean', 'number' or 'string'.
+    # workaround: https://github.community/t/reusable-workflow-with-strategy-matrix/205676/2
+    inputs:
+      os-versions:
+        description: 'Stringfied JSON object listing GitHub-hosted runnners'
+        default: '["ubuntu-22.04", "windows-2022", "macos-12"]'
+        required: false
+        type: string
+      go-versions:
+        description: 'Stringfied JSON object listing target Go versions'
+        default: '["1.20.x", "1.19.x"]'
+        required: false
+        type: string
+      run:
+        description: 'The commands to run in bash'
+        required: true
+        type: string
+
+jobs:
+  run:
+    strategy:
+      matrix:
+        os-version: ${{ fromJson(inputs.os-versions) }}
+        go-version: ${{ fromJson(inputs.go-versions) }}
+    runs-on: ${{ matrix.os-version }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go-version }}
+        cache: true
+    - run: ${{ inputs.run }}
+      shell: bash

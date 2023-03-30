@@ -15,6 +15,11 @@ on:
         default: '["1.20.x", "1.19.x"]'
         required: false
         type: string
+      pre:
+        description: 'The commands to run in bash'
+        default: ''
+        required: false
+        type: string
 
 jobs:
   test:
@@ -29,6 +34,8 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
         cache: true
+    - run: ${{ inputs.pre }}
+      shell: bash
     - run: go test -race -covermode=atomic -coverprofile=prof.out ./...
       shell: bash
     - uses: shogo82148/actions-goveralls@v1

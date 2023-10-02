@@ -32,3 +32,4 @@ jobs:
       with:
         version: latest
         skip-cache: ${{ inputs.skip-cache }}
+        args: --timeout=5m

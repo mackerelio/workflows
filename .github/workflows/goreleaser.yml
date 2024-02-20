@@ -4,10 +4,7 @@ on:
   workflow_call:
     inputs:
       go-version:
-        # TODO: upgrade default Go version after 2023-11-01.
-        # Go 1.21 requires Windows Server 2016 or higher.
-        # But Mackerel supports older Windows Servers yet.
-        default: '1.20'
+        default: '1.22'
         required: false
         type: string
 
@@ -27,4 +24,3 @@ jobs:
         args: release --rm-dist
       env:
         GITHUB_TOKEN: ${{ github.token }}
-

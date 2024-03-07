@@ -28,6 +28,7 @@ jobs:
       with:
         go-version-file: go.mod
         cache: true
+        check-latest: true
     - uses: golangci/golangci-lint-action@v4
       with:
         version: latest

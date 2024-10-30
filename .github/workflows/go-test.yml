@@ -37,19 +37,5 @@ jobs:
         check-latest: true
     - run: ${{ inputs.pre }}
       shell: bash
-    - run: go test -race -covermode=atomic -coverprofile=prof.out ./...
+    - run: go test -race ./...
       shell: bash
-    - uses: shogo82148/actions-goveralls@v1
-      with:
-        github-token: ${{ github.token }}
-        path-to-profile: prof.out
-        parallel: true
-        flag-name: ${{ matrix.os-version }}_go${{ matrix.go-version }}
-  finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: shogo82148/actions-goveralls@v1
-      with:
-        github-token: ${{ github.token }}
-        parallel-finished: true

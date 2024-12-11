@@ -8,12 +8,12 @@ on:
     inputs:
       os-versions:
         description: 'Stringfied JSON object listing GitHub-hosted runnners'
-        default: '["ubuntu-22.04", "windows-2022", "macos-12"]'
+        default: '["ubuntu-22.04", "windows-2022", "macos-14"]'
         required: false
         type: string
       go-versions:
         description: 'Stringfied JSON object listing target Go versions'
-        default: '["1.22.x", "1.21.x"]'
+        default: '["1.23.x", "1.22.x"]'
         required: false
         type: string
       run:

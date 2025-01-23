@@ -7,7 +7,7 @@ on:
     inputs:
       os-versions:
         description: 'Stringfied JSON object listing GitHub-hosted runnners'
-        default: '["ubuntu-22.04", "windows-2022", "macos-14", "windows-2025"]'
+        default: '["ubuntu-22.04", "windows-2022", "macos-14", "windows-2025"]' # When windows-2025 become stable, remove windows-2022
         required: false
         type: string
       skip-cache:

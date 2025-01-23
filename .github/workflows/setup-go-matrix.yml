@@ -8,7 +8,7 @@ on:
     inputs:
       os-versions:
         description: 'Stringfied JSON object listing GitHub-hosted runnners'
-        default: '["ubuntu-22.04", "windows-2022", "macos-14"]'
+        default: '["ubuntu-22.04", "windows-2022", "macos-14", "windows-2025"]'
         required: false
         type: string
       go-versions:

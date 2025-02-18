@@ -13,7 +13,7 @@ on:
         type: string
       go-versions:
         description: 'Stringfied JSON object listing target Go versions'
-        default: '["1.23.x", "1.22.x"]'
+        default: '["1.24.x", "1.23.x"]'
         required: false
         type: string
       run:

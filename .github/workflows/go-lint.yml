@@ -34,3 +34,9 @@ jobs:
         version: latest
         skip-cache: ${{ inputs.skip-cache }}
         args: --timeout=5m
+    - uses: goreleaser/goreleaser-action@v6
+      # If the path pattern does not match any files, this returns an empty string.
+      if: ${{ hashFiles('.goreleaser.yml') != '' }}
+      with:
+        args: check
+

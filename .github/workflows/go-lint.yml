@@ -23,18 +23,18 @@ jobs:
         os-version: ${{ fromJson(inputs.os-versions) }}
     runs-on: ${{ matrix.os-version }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
+    - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+    - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
       with:
         go-version-file: go.mod
         cache: true
         check-latest: true
-    - uses: golangci/golangci-lint-action@v6
+    - uses: golangci/golangci-lint-action@55c2c1448f86e01eaae002a5a3a9624417608d84 # v6.5.2
       with:
         version: latest
         skip-cache: ${{ inputs.skip-cache }}
         args: --timeout=5m
-    - uses: goreleaser/goreleaser-action@v6
+    - uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # v6.4.0
       # If the path pattern does not match any files, this returns an empty string.
       if: ${{ hashFiles('.goreleaser.yml') != '' }}
       with:

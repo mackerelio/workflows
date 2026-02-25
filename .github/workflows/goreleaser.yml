@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       go-version:
-        default: '1.25'
+        default: '1.26'
         required: false
         type: string
 
